@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  api:
+    container_name: pi_dev_api
+    image: pi_dev_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'php -S 0.0.0.0:8000 -t public/'
+    ports:
+      - "9000:8000"
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+    networks:
+      - unileste
+
+  db:
+    image: mysql:5.7
+    container_name: pi_dev_db
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - unileste
+networks:
+  unileste:
+    external: true
