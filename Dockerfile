@@ -27,3 +27,7 @@ RUN composer dump-autoload -a \
     && rm -f /app/storage/logs/app.log \
     && touch /app/storage/logs/app.log \
     && chown -R www-data:www-data /app
+
+CMD php -S 0.0.0.0:$PORT -t public/
+
+EXPOSE $PORT
