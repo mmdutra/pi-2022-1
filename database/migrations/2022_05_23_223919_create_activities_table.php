@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('title');
             $table->dateTime('due_date');
             $table->boolean('available');
+
+            $table->foreignId('course_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
             $table->timestamps();
         });
     }
