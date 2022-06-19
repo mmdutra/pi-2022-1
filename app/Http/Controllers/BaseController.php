@@ -19,7 +19,7 @@ abstract class BaseController extends LaravelController
     {
         $validated = $this->validate(
             request: $request,
-            rules: $this->validationRules,
+            rules: $this->validationRules(),
             messages: $this->validationMessages
         );
 
@@ -34,7 +34,7 @@ abstract class BaseController extends LaravelController
 
         $validated = $this->validate(
             request: $request,
-            rules: $this->validationRules,
+            rules: $this->validationRules(),
             messages: $this->validationMessages
         );
 

@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\RaGenerator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -46,22 +47,32 @@ class UserController extends BaseController
             'password' => $password
         ]);
 
-        $register = $this->model::create($validated);
+        DB::beginTransaction();
 
-        if ($validated['type'] === UserType::STUDENT) {
-            Student::create([
-                'user_id' => $register->id,
-                'status' => true,
-                'average' => 0
-            ]);
-        } else {
-            Teacher::create([
-                'user_id' => $register->id,
-                'degree' => $request->get('degree'),
-            ]);
+        try {
+            $register = $this->model::create($validated);
+
+            if ($validated['type'] === UserType::STUDENT) {
+                Student::create([
+                    'user_id' => $register->id,
+                    'status' => true,
+                    'average' => 0
+                ]);
+            } else {
+                Teacher::create([
+                    'user_id' => $register->id,
+                    'degree' => $request->get('degree'),
+                ]);
+            }
+
+            DB::commit();
+
+            return response()->json(['id' => $register->id], 201);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            throw $exception;
         }
-
-        return response()->json(['id' => $register->id], 201);
     }
 
     protected function validationRules(): array

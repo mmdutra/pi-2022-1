@@ -29,22 +29,4 @@ class TeacherController extends Controller
 
         return response()->json(['data' => $courses]);
     }
-
-    public function publishAbsences(Request $request): JsonResponse
-    {
-        $this->validate($request, [
-            'students' => 'required|array|exists_in:students'
-        ]);
-
-        return response()->json();
-    }
-
-    public function publishGrades(Request $request): JsonResponse
-    {
-        $this->validate($request, [
-            'student_grades'  => 'required|array'
-        ]);
-
-        return response()->json();
-    }
 }

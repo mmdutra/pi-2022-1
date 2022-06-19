@@ -19,4 +19,9 @@ class Course extends Model
             table:'teacher_courses'
         );
     }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
 }

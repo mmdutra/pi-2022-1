@@ -24,6 +24,13 @@ class CourseController extends BaseController
         return response()->json(['id' => $course->id], 201);
     }
 
+    public function activities(int $id): JsonResponse
+    {
+        $course = Course::findOrFail($id);
+
+        return response()->json(['data' => $course->activities()->get()]);
+    }
+
     protected function validationRules(): array
     {
         return [

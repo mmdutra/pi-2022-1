@@ -9,6 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     protected $table = 'activities';
-    protected $fillable = ['title', 'body', 'due_date', 'available'];
+    protected $fillable = ['title', 'body', 'due_date', 'available', 'course_id'];
     public $timestamps = true;
 }

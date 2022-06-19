@@ -34,6 +34,10 @@ $router->group(['prefix' => 'api'], function ($router) {
         });
 
         $router->group(['prefix' => 'students'], function ($router) {
+            $router->get('/', 'StudentController@all');
+            $router->get('/courses/{id}', 'StudentController@courses');
+            $router->post('/activities', 'StudentController@publishActivity');
+            $router->get('/activities/{id}', 'StudentController@courses');
         });
 
         $router->group(['prefix' => 'teachers'], function ($router) {
@@ -50,6 +54,7 @@ $router->group(['prefix' => 'api'], function ($router) {
         $router->group(['prefix' => 'courses'], function ($router) {
             $router->get('/', 'CourseController@all');
             $router->post('/', 'CourseController@store');
+            $router->get('/activities/{id}', 'CourseController@activities');
             $router->put('/{id}', 'CourseController@update');
             $router->delete('/{id}', 'CourseController@store');
         });
