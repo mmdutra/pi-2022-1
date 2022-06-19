@@ -19,12 +19,39 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function ($router) {
     $router->post('login', 'AuthController@login');
-    $router->post('logout', 'AuthController@logout');
 
     // ROUTES WITH AUTH
     $router->group(['middleware' => 'auth:api'], function ($router) {
+        $router->post('logout', 'AuthController@logout');
         $router->get('me', 'UserController@me');
-        $router->get('users', 'UserController@getUsers');
         $router->post('refresh', 'AuthController@refresh');
+
+        $router->group(['prefix' => 'users'], function ($router) {
+            $router->get('/', 'UserController@all');
+            $router->post('/', 'UserController@store');
+            $router->put('/{id}', 'UserController@update');
+            $router->delete('/{id}', 'UserController@store');
+        });
+
+        $router->group(['prefix' => 'students'], function ($router) {
+        });
+
+        $router->group(['prefix' => 'teachers'], function ($router) {
+            $router->get('/courses/{id}', 'TeacherController@courses');
+        });
+
+        $router->group(['prefix' => 'activities'], function ($router) {
+            $router->get('/', 'ActivityController@all');
+            $router->post('/', 'ActivityController@store');
+            $router->put('/{id}', 'ActivityController@update');
+            $router->delete('/{id}', 'ActivityController@store');
+        });
+
+        $router->group(['prefix' => 'courses'], function ($router) {
+            $router->get('/', 'CourseController@all');
+            $router->post('/', 'CourseController@store');
+            $router->put('/{id}', 'CourseController@update');
+            $router->delete('/{id}', 'CourseController@store');
+        });
     });
 });

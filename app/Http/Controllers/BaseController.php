@@ -46,7 +46,7 @@ abstract class BaseController extends LaravelController
 
     public function all(): JsonResponse
     {
-        return $this->model::all();
+        return response()->json(['data' => $this->model::all()]);
     }
 
     public function delete(int $id): JsonResponse

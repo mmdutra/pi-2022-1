@@ -12,6 +12,8 @@ class RaGenerator
     {
         $timestamp = (string) (new \DateTime())->getTimestamp();
 
+        $timestamp = substr($timestamp, 0, -2);
+
         if ($type === UserType::STUDENT) {
             return 'A' . $timestamp;
         }
