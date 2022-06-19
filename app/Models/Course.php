@@ -10,5 +10,13 @@ class Course extends Model
 {
     protected $table = 'courses';
     protected $fillable = ['name', 'description'];
-    public $timestamps = true;
+    public $timestamps = false;
+
+    public function teachers()
+    {
+        return $this->belongsToMany(
+            related: Teacher::class,
+            table:'teacher_courses'
+        );
+    }
 }

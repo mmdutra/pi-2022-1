@@ -17,6 +17,7 @@ class ActivityController extends BaseController
             'body' => 'required|string',
             'due_date' => 'required|datetime|after:now',
             'available' => 'nullable|boolean',
+            'course_id' => 'required|exists:courses,id'
         ];
     }
 }
