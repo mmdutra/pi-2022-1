@@ -60,3 +60,8 @@ $router->group(['prefix' => 'api'], function ($router) {
         });
     });
 });
+
+
+$router->options('/{any:.*}', function () {
+    return response(['status' => 'success']);
+});
