@@ -2,6 +2,10 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -60,7 +64,6 @@ $router->group(['prefix' => 'api'], function ($router) {
         });
     });
 });
-
 
 $router->options('/{any:.*}', function () {
     return response(['status' => 'success']);
