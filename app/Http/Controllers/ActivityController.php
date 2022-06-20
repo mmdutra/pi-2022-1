@@ -5,10 +5,18 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use Illuminate\Http\JsonResponse;
 
 class ActivityController extends BaseController
 {
     protected string $model = Activity::class;
+
+    public function findById(int $id): JsonResponse
+    {
+        $course = Activity::findOrFail($id);
+
+        return response()->json(['data' => $course]);
+    }
 
     protected function validationRules(): array
     {

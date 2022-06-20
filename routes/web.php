@@ -51,6 +51,7 @@ $router->group(['prefix' => 'api'], function ($router) {
         $router->group(['prefix' => 'activities'], function ($router) {
             $router->get('/', 'ActivityController@all');
             $router->post('/', 'ActivityController@store');
+            $router->get('/{id}', 'ActivityController@findById');
             $router->put('/{id}', 'ActivityController@update');
             $router->delete('/{id}', 'ActivityController@store');
         });
@@ -59,6 +60,7 @@ $router->group(['prefix' => 'api'], function ($router) {
             $router->get('/', 'CourseController@all');
             $router->post('/', 'CourseController@store');
             $router->get('/activities/{id}', 'CourseController@activities');
+            $router->get('/{id}', 'CourseController@findById');
             $router->put('/{id}', 'CourseController@update');
             $router->delete('/{id}', 'CourseController@store');
         });
