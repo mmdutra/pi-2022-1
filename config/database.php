@@ -13,6 +13,7 @@ return [
             'password' => env('DB_PASSWORD', 'secret'),
         ],
         'clear_db' => [
+            'driver' => 'mysql',
             'host' => $databaseUrl['host'],
             'port' => 3306,
             'database' => substr($databaseUrl['path'], 1),
