@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller;
 
 class TeacherController extends Controller
@@ -23,10 +22,6 @@ class TeacherController extends Controller
 
         $courses = $teacher->courses()->get();
 
-        if ($courses->count() == 0) {
-            return response()->json(['data' => []]);
-        }
-
-        return response()->json(['data' => $courses]);
+        return response()->json(['data' => $courses->toArray()]);
     }
 }

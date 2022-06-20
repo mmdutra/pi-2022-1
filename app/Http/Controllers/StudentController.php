@@ -29,7 +29,7 @@ class StudentController extends BaseController
             return response()->json(['data' => []]);
         }
 
-        return response()->json(['data' => $courses]);
+        return response()->json(['data' => $courses->toArray()]);
     }
 
     public function activities(int $id)
@@ -43,11 +43,7 @@ class StudentController extends BaseController
 
         $activities = $teacher->activities()->get();
 
-        if ($activities->count() == 0) {
-            return response()->json(['data' => []]);
-        }
-
-        return response()->json(['data' => $activities]);
+        return response()->json(['data' => $activities->toArray()]);
     }
 
     public function publishActivity(Request $request): JsonResponse

@@ -19,6 +19,8 @@ return [
             'database' => substr($databaseUrl['path'], 1),
             'username' => $databaseUrl['user'],
             'password' => $databaseUrl['pass'],
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
         ]
     ]
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as LaravelController;
@@ -46,7 +47,10 @@ abstract class BaseController extends LaravelController
 
     public function all(): JsonResponse
     {
-        return response()->json(['data' => $this->model::all()]);
+        /** @var Collection $registers */
+        $registers = $this->model::all();
+
+        return response()->json(['data' => $registers->toArray()]);
     }
 
     public function delete(int $id): JsonResponse
